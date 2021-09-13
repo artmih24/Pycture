@@ -1,0 +1,1 @@
+pyinstaller --onefile --noconsole -i "Pycture_icon.ico" Pycture.py
