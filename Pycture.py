@@ -136,7 +136,7 @@ def Get_''' + ImageNameInPyFile + '''(image_str):
 #  \ \__,_|\__,_|_|   \__|_| |_| |_|_|_| |_|_____|  |_|
 #   \____/
 
-from PyQt5 import QtGui
+from PyQt5 import QtGui, QtCore
 import base64
 import os
 
@@ -144,7 +144,7 @@ def Get_''' + ImageNameInPyFile + '''(image_str):
     ImageStr = base64.b64decode(image_str)
     with open("''' + ImageNameInPyFile + ImageExtension + '''", "wb") as ''' + ImageNameInPyFile + "_text:\n        " + ImageNameInPyFile + '''_text.write(ImageStr)
     ''' + ImageNameInPyFile + '''_text.close()
-    qp = QtGui.QPixmap("''' + ImageNameInPyFile + ImageExtension + '''")
+    qp = QtGui.QPixmap("''' + ImageNameInPyFile + ImageExtension + '''").scaled(100, 100, transformMode=QtCore.Qt.SmoothTransformation)
     os.remove("''' + ImageNameInPyFile + ImageExtension + '''")
     return(qp)
         
