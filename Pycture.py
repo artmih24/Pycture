@@ -50,12 +50,18 @@ class mywindow(QtWidgets.QMainWindow):
         self.ui.lineEdit.setFixedWidth(self.width() - 84)
 
     def TextEdited(self):
-        if self.ui.lineEdit.text() != "" and self.ui.lineEdit_2.text() != "": self.ui.pushButton_2.setEnabled(True)
-        else: self.ui.pushButton_2.setEnabled(False)
+        self.ui.pushButton_2.setEnabled(self.ui.lineEdit.text() != "" and self.ui.lineEdit_2.text() != "")
+        # if self.ui.lineEdit.text() != "" and self.ui.lineEdit_2.text() != "":
+        #     self.ui.pushButton_2.setEnabled(True)
+        # else:
+        #     self.ui.pushButton_2.setEnabled(False)
 
     def TextChanged(self):
-        if self.ui.lineEdit.text() != "" and self.ui.lineEdit_2.text() != "": self.ui.pushButton_2.setEnabled(True)
-        else: self.ui.pushButton_2.setEnabled(False)
+        self.ui.pushButton_2.setEnabled(self.ui.lineEdit.text() != "" and self.ui.lineEdit_2.text() != "")
+        # if self.ui.lineEdit.text() != "" and self.ui.lineEdit_2.text() != "":
+        #     self.ui.pushButton_2.setEnabled(True)
+        # else:
+        #     self.ui.pushButton_2.setEnabled(False)
 
     def aboutClicked(self):
         self.about_window.show()
@@ -72,17 +78,23 @@ class mywindow(QtWidgets.QMainWindow):
 | | (_| | (_| | |  | |_| | | | | | | | | |/ __/|__   _|
  \ \__,_|\__,_|_|   \__|_| |_| |_|_|_| |_|_____|  |_|
   \____/''')
-  """
+"""
 
     def SelectButtonClicked(self):
         InputImageName = QFileDialog.getOpenFileName(self, "Выбрать изображение", "/home", "Все типы изображений (*.jpg *.jpeg *.jpe *.jfif *.png *.bmp *.gif *.ico);; Изображение JPEG (*.jpg *.jpeg *.jpe *.jfif);; Изображение PNG (*.png);; Изображение BMP (*.bmp);; Изображение GIF (*.gif);; Значок ICO (*.ico)")[0]
         self.ui.lineEdit.setText(InputImageName)
-        if self.ui.lineEdit.text() != "" and self.ui.lineEdit_2.text() != "": self.ui.pushButton_2.setEnabled(True)
-        else: self.ui.pushButton_2.setEnabled(False)
+        self.ui.pushButton_2.setEnabled(self.ui.lineEdit.text() != "" and self.ui.lineEdit_2.text() != "")
+        # if self.ui.lineEdit.text() != "" and self.ui.lineEdit_2.text() != "":
+        #     self.ui.pushButton_2.setEnabled(True)
+        # else:
+        #     self.ui.pushButton_2.setEnabled(False)
 
     def FilePathEntered(self):
-        if self.ui.lineEdit.text() != "": self.ui.pushButton_2.setEnabled(True)
-        else: self.ui.pushButton_2.setEnabled(False)
+        self.ui.pushButton_2.setEnabled(self.ui.lineEdit.text() != "")
+        # if self.ui.lineEdit.text() != "":
+        #     self.ui.pushButton_2.setEnabled(True)
+        # else:
+        #     self.ui.pushButton_2.setEnabled(False)
 
     def GenerateButtonClicked(self):
         q = QMessageBox()
@@ -119,7 +131,8 @@ import os
 
 def Get_''' + ImageNameInPyFile + '''(image_str):
     ImageStr = base64.b64decode(image_str)
-    with open("''' + ImageNameInPyFile + ImageExtension + '''", "wb") as ''' + ImageNameInPyFile + "_text:\n        " + ImageNameInPyFile + '''_text.write(ImageStr)
+    with open("''' + ImageNameInPyFile + ImageExtension + '''", "wb") as ''' + ImageNameInPyFile + '''_text:
+    ''' + ImageNameInPyFile + '''_text.write(ImageStr)
     ''' + ImageNameInPyFile + '''_text.close()
     qi = QtGui.QIcon("''' + ImageNameInPyFile + ImageExtension + '''")
     os.remove("''' + ImageNameInPyFile + ImageExtension + '''")
@@ -142,7 +155,8 @@ import os
 
 def Get_''' + ImageNameInPyFile + '''(image_str):
     ImageStr = base64.b64decode(image_str)
-    with open("''' + ImageNameInPyFile + ImageExtension + '''", "wb") as ''' + ImageNameInPyFile + "_text:\n        " + ImageNameInPyFile + '''_text.write(ImageStr)
+    with open("''' + ImageNameInPyFile + ImageExtension + '''", "wb") as ''' + ImageNameInPyFile + '''_text:
+    ''' + ImageNameInPyFile + '''_text.write(ImageStr)
     ''' + ImageNameInPyFile + '''_text.close()
     qp = QtGui.QPixmap("''' + ImageNameInPyFile + ImageExtension + '''").scaled(100, 100, transformMode=QtCore.Qt.SmoothTransformation)
     os.remove("''' + ImageNameInPyFile + ImageExtension + '''")
@@ -165,8 +179,9 @@ def Get_''' + ImageNameInPyFile + '''(image_str):
                     QMessageBox.information(q, "Pycture", "Файл " + PyFileName + " успешно создан!", QMessageBox.Ok)
 
 
-app = QtWidgets.QApplication([])
-application = mywindow()
-application.show()
+if __name__ == '__main__':
+    app = QtWidgets.QApplication([])
+    application = mywindow()
+    application.show()
 
-sys.exit(app.exec())
+    sys.exit(app.exec())
